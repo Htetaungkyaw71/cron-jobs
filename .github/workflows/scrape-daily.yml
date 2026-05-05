@@ -30,8 +30,8 @@ jobs:
         run: npm run work:100
         working-directory: "."
 
-      - name: Merge outputs and import to DB
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: node import-to-db.js
-        working-directory: "."
+      # - name: Merge outputs and import to DB
+      #   env:
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      #   run: node import-to-db.js
+      #   working-directory: "."

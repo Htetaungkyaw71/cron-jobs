@@ -12,6 +12,11 @@
  *   npm install puppeteer axios cheerio
  */
 
+// Polyfill `File` for environments (GitHub Actions / Node 18) where
+// the `File` web API isn't available but some deps (undici) expect it.
+import FilePoly from "fetch-blob/file.js";
+if (typeof globalThis.File === "undefined") globalThis.File = FilePoly;
+
 import puppeteer from "puppeteer";
 import * as cheerio from "cheerio";
 import fs from "node:fs";

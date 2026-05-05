@@ -3,7 +3,7 @@ import path from "path";
 import { Client } from "pg";
 import bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 async function readJson(filePath) {
   try {
@@ -41,7 +41,7 @@ async function main() {
   console.log("Wrote", merged.length, "jobs to files/merged_jobs.json");
 
   // Load environment variables from files/.env so running `node import-to-db.js` picks up DATABASE_URL
-  dotenv.config({ path: path.join(filesDir, '.env') });
+  dotenv.config({ path: path.join(filesDir, ".env") });
 
   const dbUrl = process.env.DATABASE_URL;
   if (!dbUrl) {
@@ -202,17 +202,17 @@ async function main() {
       jobsCreated: created,
       jobsSkipped: skipped,
     });
-    
+
     // remove original scraper output files to avoid re-processing
     try {
-      await fs.unlink(path.join(filesDir, 'todays_jobs.json'));
-      console.log('Removed todays_jobs.json');
+      await fs.unlink(path.join(filesDir, "todays_jobs.json"));
+      console.log("Removed todays_jobs.json");
     } catch (e) {
       // ignore if not present
     }
     try {
-      await fs.unlink(path.join(filesDir, 'workingnomads_jobs.json'));
-      console.log('Removed workingnomads_jobs.json');
+      await fs.unlink(path.join(filesDir, "workingnomads_jobs.json"));
+      console.log("Removed workingnomads_jobs.json");
     } catch (e) {
       // ignore if not present
     }
