@@ -24,10 +24,13 @@ if (typeof globalThis.File === "undefined") {
   };
 }
 
-import puppeteer from "puppeteer";
-import * as cheerio from "cheerio";
-import fs from "node:fs";
-import path from "node:path";
+// Import modules dynamically AFTER shim so their dependency graph (undici)
+// doesn't run before `File` is defined. Top-level `import` is hoisted and
+// evaluated before module code which caused `File` to be undefined.
+const puppeteer = (await import("puppeteer")).default;
+const cheerio = await import("cheerio");
+const fs = await import("node:fs");
+const path = await import("node:path");
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const BASE_URL = "https://justjoin.it";
