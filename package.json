@@ -1,0 +1,27 @@
+{
+  "name": "justjoinit-scraper",
+  "version": "1.0.0",
+  "description": "Web scraper for justjoin.it job listings",
+  "main": "scraper.js",
+  "type": "module",
+  "scripts": {
+    "start": "node scraper.js",
+    "scrape": "node scraper.js",
+    "scrape:50": "node scraper.js --limit 50",
+    "scrape:100": "node scraper.js --limit 100 --output todays_jobs.json",
+    "work:100": "node workingnomads_scraper.js --limit 100 --output workingnomads_jobs.json",
+    "import-to-db": "node import-to-db.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "cron": "^4.4.0",
+    "express": "^5.2.1",
+    "puppeteer": "^22.0.0",
+    "pg": "^8.10.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
