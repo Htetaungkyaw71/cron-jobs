@@ -14,8 +14,15 @@
 
 // Polyfill `File` for environments (GitHub Actions / Node 18) where
 // the `File` web API isn't available but some deps (undici) expect it.
-import FilePoly from "fetch-blob/file.js";
-if (typeof globalThis.File === "undefined") globalThis.File = FilePoly;
+if (typeof globalThis.File === "undefined") {
+  globalThis.File = class File extends Blob {
+    constructor(bits = [], name = "", options = {}) {
+      super(bits, options);
+      this.name = name || "";
+      this.lastModified = options.lastModified || Date.now();
+    }
+  };
+}
 
 import puppeteer from "puppeteer";
 import * as cheerio from "cheerio";
