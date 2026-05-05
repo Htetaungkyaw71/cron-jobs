@@ -18,20 +18,20 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Install dependencies (files/)
+      - name: Install dependencies
         run: npm ci
-        working-directory: files
+        working-directory: "."
 
       - name: Run justjoin.it scraper (scrape:100)
         run: npm run scrape:100
-        working-directory: files
+        working-directory: "."
 
       - name: Run workingnomads scraper (work:100)
         run: npm run work:100
-        working-directory: files
+        working-directory: "."
 
       - name: Merge outputs and import to DB
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: node import-to-db.js
-        working-directory: files
+        working-directory: "."
