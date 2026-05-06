@@ -22,15 +22,15 @@ jobs:
         run: npm ci
         working-directory: "."
 
-      - name: Run justjoin.it scraper (scrape:100) with retries
+      - name: Run workingnomads scraper (work:100) with retries
         run: |
           max_attempts=10
           attempt=1
           until [ $attempt -gt $max_attempts ]
           do
-            echo "Attempt $attempt/$max_attempts: running scraper"
-            npm run scrape:100 && break
-            echo "Scraper failed on attempt $attempt"
+            echo "Attempt $attempt/$max_attempts: running workingnomads scraper"
+            npm run work:100 && break
+            echo "Workingnomads scraper failed on attempt $attempt"
             sleep_seconds=$(( attempt * 10 ))
             echo "Waiting ${sleep_seconds}s before retrying..."
             sleep $sleep_seconds
@@ -42,15 +42,15 @@ jobs:
           fi
         working-directory: "."
 
-      - name: Run workingnomads scraper (work:100) with retries
+      - name: Run justjoin.it scraper (scrape:100) with retries
         run: |
           max_attempts=10
           attempt=1
           until [ $attempt -gt $max_attempts ]
           do
-            echo "Attempt $attempt/$max_attempts: running workingnomads scraper"
-            npm run work:100 && break
-            echo "Workingnomads scraper failed on attempt $attempt"
+            echo "Attempt $attempt/$max_attempts: running scraper"
+            npm run scrape:100 && break
+            echo "Scraper failed on attempt $attempt"
             sleep_seconds=$(( attempt * 10 ))
             echo "Waiting ${sleep_seconds}s before retrying..."
             sleep $sleep_seconds
