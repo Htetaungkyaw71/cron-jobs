@@ -22,6 +22,12 @@ jobs:
         run: npm ci
         working-directory: "."
 
+      - name: Delete jobs older than 30 days
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: node delete-old-jobs.js
+        working-directory: "."
+
       - name: Run workingnomads scraper (work:100) with retries
         run: |
           max_attempts=10
